@@ -1,0 +1,168 @@
+---
+interface Tech {
+  name: string;
+  icon: string;
+  category: string;
+  note?: string;
+}
+
+const technologies: Tech[] = [
+  // Languages
+  { name: 'TypeScript', icon: 'TS', category: 'Languages' },
+  { name: 'JavaScript', icon: 'JS', category: 'Languages' },
+  { name: 'Java', icon: 'Jv', category: 'Languages' },
+  { name: 'C#', icon: 'C#', category: 'Languages' },
+
+  // Frameworks & Runtimes
+  { name: 'Node.js', icon: 'Nd', category: 'Frameworks & Runtimes' },
+  { name: 'Discord.js', icon: 'Dc', category: 'Frameworks & Runtimes' },
+  { name: 'Spigot API', icon: 'Sp', category: 'Frameworks & Runtimes' },
+  { name: 'Fabric API', icon: 'Fb', category: 'Frameworks & Runtimes' },
+  { name: 'Docker', icon: '🐳', category: 'Frameworks & Runtimes', note: 'Containerisation' },
+];
+
+const categories = ['Languages', 'Frameworks & Runtimes'];
+---
+
+<section class="section" id="technologies">
+  <div class="glow-divider"></div>
+
+  <div class="container">
+    <p class="section-label">Technologies</p>
+    <h2 class="section-heading">
+      Tools I reach for<br/>
+      <span>when building things.</span>
+    </h2>
+
+    <p class="tech__intro">
+      I pick the right tool for the problem — not the other way around.
+      These are the technologies I know well.
+    </p>
+
+    {categories.map(cat => (
+      <div class="tech__category">
+        <h3 class="tech__category-label">
+          <span class="slash">/</span> {cat}
+        </h3>
+        <div class="tech__grid">
+          {technologies.filter(t => t.category === cat).map(tech => (
+            <div class="tech-card">
+              <div class="tech-card__icon">{tech.icon}</div>
+              <div class="tech-card__body">
+                <span class="tech-card__name">{tech.name}</span>
+                {tech.note && <span class="tech-card__note">{tech.note}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.tech__intro {
+  font-size: 1.05rem;
+  color: rgba(232, 213, 255, 0.55);
+  max-width: 560px;
+  margin-bottom: 4rem;
+  line-height: 1.85;
+}
+
+.tech__category {
+  margin-bottom: 3rem;
+}
+
+.tech__category-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amethyst);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slash {
+  color: var(--nova);
+  font-size: 1rem;
+}
+
+.tech__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tech-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(13, 8, 36, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  cursor: default;
+}
+
+.tech-card:hover {
+  border-color: var(--border-bright);
+  background: rgba(42, 21, 88, 0.35);
+  transform: translateY(-3px);
+}
+
+.tech-card__icon {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--amethyst);
+  background: rgba(107, 63, 160, 0.2);
+  border: 1px solid rgba(107, 63, 160, 0.35);
+  min-width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.tech-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.tech-card__name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--stardust);
+  white-space: nowrap;
+}
+
+.tech-card__note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(196, 157, 245, 0.4);
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .tech__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .tech__grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

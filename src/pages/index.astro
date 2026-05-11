@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Technologies from '../components/Technologies.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Nav />
+  <main>
+    <Hero />
+    <About />
+    <Technologies />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  // Observe section headings, cards, and tech bars
+  document.querySelectorAll(
+    '.section-label, .section-heading, .tech-card, .project-card, .about__fact, .contact__link'
+  ).forEach((el) => observer.observe(el));
+</script>
+
+<style is:global>
+  /* Scroll-triggered entrance for cards */
+  .tech-card,
+  .project-card,
+  .about__fact,
+  .contact__link,
+  .section-label,
+  .section-heading {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
+  }
+
+  .tech-card.in-view,
+  .project-card.in-view,
+  .about__fact.in-view,
+  .contact__link.in-view,
+  .section-label.in-view,
+  .section-heading.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .tech__grid .tech-card:nth-child(1) { transition-delay: 0.05s; }
+  .tech__grid .tech-card:nth-child(2) { transition-delay: 0.1s; }
+  .tech__grid .tech-card:nth-child(3) { transition-delay: 0.15s; }
+  .tech__grid .tech-card:nth-child(4) { transition-delay: 0.2s; }
+  .tech__grid .tech-card:nth-child(5) { transition-delay: 0.25s; }
+
+  .projects__list .project-card:nth-child(1) { transition-delay: 0.1s; }
+  .projects__list .project-card:nth-child(2) { transition-delay: 0.2s; }
+
+  .contact__links .contact__link:nth-child(1) { transition-delay: 0.05s; }
+  .contact__links .contact__link:nth-child(2) { transition-delay: 0.12s; }
+  .contact__links .contact__link:nth-child(3) { transition-delay: 0.19s; }
+
+  .about__facts .about__fact:nth-child(1) { transition-delay: 0.05s; }
+  .about__facts .about__fact:nth-child(2) { transition-delay: 0.12s; }
+  .about__facts .about__fact:nth-child(3) { transition-delay: 0.19s; }
+
+  /* Section heading follows its label */
+  .section-heading { transition-delay: 0.08s; }
+</style>
