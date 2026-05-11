@@ -6,13 +6,11 @@
       <stop offset="80%" stop-color="#ff6600" />
       <stop offset="100%" stop-color="#ff3300" />
     </radialGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="1" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
   </defs>
+  <!-- Background matching the site's dark theme -->
+  <rect width="32" height="32" rx="6" fill="#0d0824"/>
   <!-- Subtle outer atmosphere -->
-  <circle cx="16" cy="16" r="14" fill="#ff6600" opacity="0.2" />
+  <circle cx="16" cy="16" r="12" fill="#ff6600" opacity="0.15" />
   <!-- Main sun body with gradient -->
-  <circle cx="16" cy="16" r="10" fill="url(#sunGradient)" filter="url(#glow)" />
+  <circle cx="16" cy="16" r="8" fill="url(#sunGradient)" />
 </svg>
